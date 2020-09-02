@@ -1,0 +1,66 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+android {
+  compileSdkVersion rootProject.ext.compileSdkVersion
+
+  lintOptions {
+    abortOnError false
+  }
+
+  defaultConfig {
+    applicationId "com.raywenderlich.android.foodeat"
+    minSdkVersion rootProject.ext.minSdkVersion
+    targetSdkVersion rootProject.ext.targetSdkVersion
+    versionCode 1
+    versionName "1.0"
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    vectorDrawables.useSupportLibrary = true
+  }
+
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+  }
+}
+
+dependencies {
+  implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+  // Kotlin
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+
+  // Support Libraries
+  implementation 'androidx.appcompat:appcompat:1.1.0'
+  implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta6'
+
+  // Testing Dependencies
+  testImplementation 'junit:junit:4.12'
+  androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+  androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+  def rx_version = "2.1.1"
+  implementation "io.reactivex.rxjava2:rxandroid:$rx_version"
+  implementation "io.reactivex.rxjava2:rxkotlin:2.4.0"
+
+  def room_version = "2.2.5"
+  implementation "androidx.room:room-runtime:$room_version"
+  implementation "androidx.room:room-rxjava2:$room_version"
+  kapt "androidx.room:room-compiler:$room_version"
+
+  def koin_version = "2.1.5"
+  implementation "org.koin:koin-android:$koin_version"
+  implementation "org.koin:koin-android-viewmodel:$koin_version"
+
+  implementation 'androidx.recyclerview:recyclerview:1.1.0'
+
+
+}
